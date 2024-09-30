@@ -1,0 +1,58 @@
+@import "../../styles/variables.scss";
+
+.pagination-container {
+  position: relative;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 1100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.total-items {
+  font-size: 17px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.pagination-buttons {
+  display: flex;
+  align-self: flex-end;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-buttons button {
+  padding: 8px 12px;
+  border: none;
+  background-color: $soft-bg;
+  color: $main-color;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.pagination-buttons button:hover {
+  background-color: lighten($soft-bg, 10%);
+}
+
+.pagination-buttons button:disabled {
+  background-color: $soft-color;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pagination-container span {
+  font-size: 14px;
+}
+
+@media (max-width: 860px) {
+  .pagination-buttons {
+    margin: 30px auto;
+  }
+}

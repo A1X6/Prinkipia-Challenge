@@ -1,0 +1,83 @@
+@import "../../styles/variables.scss";
+
+.job-card {
+  background-color: $dark-bg;
+  border: 1px solid $soft-bg;
+  border-radius: 8px;
+  padding: 16px;
+  width: 100%;
+  max-width: 300px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  margin: 10px auto;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.job-info {
+  color: $soft-color;
+  cursor: pointer;
+  padding-bottom: 8px;
+  border-bottom: 1px solid $soft-bg;
+}
+
+.job-info h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.job-info p {
+  margin: 8px 0 0;
+}
+
+.job-status {
+  font-weight: bold;
+}
+
+.job-status.queued {
+  color: blue;
+}
+
+.job-status.running {
+  color: orange;
+}
+
+.job-status.success {
+  color: green;
+}
+
+.job-status.failed {
+  color: red;
+}
+
+.job-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.job-actions button {
+  padding: 8px 12px;
+  border: none;
+  background-color: $soft-bg;
+  color: $main-color;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.job-actions button:hover {
+  background-color: lighten($soft-bg, 10%);
+}
+
+.job-actions button:disabled {
+  background-color: $soft-color;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
