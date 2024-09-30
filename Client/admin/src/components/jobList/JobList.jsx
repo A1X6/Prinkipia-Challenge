@@ -7,6 +7,8 @@ import handleRetryJob from "../../utils/handleRetryJob";
 import Pagination from "../pagination/Pagination";
 import JobCard from "../jobCard/JobCard";
 import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Alert from "../alert/Alert";
 
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
@@ -18,6 +20,9 @@ const JobList = () => {
   const [currentPage, setCurrentPage] = useState(SearchPage);
   const [totalJobs, setTotalJobs] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertStatus, setAlertStatus] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,15 +37,20 @@ const JobList = () => {
     fetchData();
   }, [currentPage]);
 
+  const handleCreateJob = () => {
+    navigate("/jobs/create");
+  };
+
   const handleJobClick = (job) => {
-    console.log(job);
     setSelectedJob(job);
     setModalVisible(true);
+    setSearchParams({ id: job._id });
   };
 
   const closeModal = () => {
     setModalVisible(false);
     setSelectedJob(null);
+    setSearchParams();
   };
 
   const handleNextPage = () => {
@@ -65,17 +75,35 @@ const JobList = () => {
   };
 
   const handleRetry = async (jobId) => {
-    await handleRetryJob(jobId);
+    try {
+      await handleRetryJob(jobId);
+      setAlertMessage("Job retried successfully.");
+      setAlertStatus("success");
+    } catch (error) {
+      setAlertMessage("Failed to retry the job.");
+      setAlertStatus("error");
+    }
     refreshJobs();
+
+    setTimeout(() => setAlertMessage(""), 3000);
   };
 
   const handleDelete = async (jobId) => {
-    await handleDeleteJob(jobId);
-    if (jobs.length === 1 && currentPage > 1) {
-      setSearchParams({ page: currentPage - 1 });
-      setCurrentPage(currentPage - 1);
+    try {
+      await handleDeleteJob(jobId);
+      if (jobs.length === 1 && currentPage > 1) {
+        setSearchParams({ page: currentPage - 1 });
+        setCurrentPage(currentPage - 1);
+      }
+      setAlertMessage("Job deleted successfully.");
+      setAlertStatus("success");
+    } catch (error) {
+      setAlertMessage("Failed to delete the job.");
+      setAlertStatus("error");
     }
     await refreshJobs();
+
+    setTimeout(() => setAlertMessage(""), 3000);
   };
 
   if (loading) {
@@ -85,6 +113,12 @@ const JobList = () => {
   return (
     <div className="job-list-container">
       <h2>Job Listings</h2>
+      <div className="create-job">
+        <span className="create-job-text">Create New Job:</span>
+        <button className="create-job-btn" onClick={handleCreateJob}>
+          Create
+        </button>
+      </div>
       <div className="job-list">
         {jobs.map((job) => (
           <JobCard
@@ -96,7 +130,7 @@ const JobList = () => {
           />
         ))}
       </div>
-
+      <Alert message={alertMessage} status={alertStatus} />
       {modalVisible && (
         <JobDetailModal
           job_={selectedJob}
@@ -105,7 +139,6 @@ const JobList = () => {
           onRetry={() => handleRetry(selectedJob._id)}
         />
       )}
-
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

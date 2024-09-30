@@ -38,8 +38,10 @@ exports.getJob = async (req, res) => {
 
 exports.createJob = async (req, res) => {
   try {
-    const { name, details, createdBy, status } = req.body;
+    const { name, details, status } = req.body;
     if (!status) status = "QUEUED";
+    console.log(req.user);
+    const createdBy = req.user.id;
     const newJob = new Job({
       name,
       details,

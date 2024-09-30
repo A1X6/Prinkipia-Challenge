@@ -5,6 +5,7 @@ import Login from "./pages/login/Login";
 import Layout from "./Layout";
 import RequireAuth from "./RequireAuth";
 import Users from "./pages/users/Users";
+import JobsCreate from "./pages/jobsCreate/JobsCreate";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -34,6 +35,14 @@ function App() {
             element={
               <RequireAuth>
                 <Jobs />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="jobs/create"
+            element={
+              <RequireAuth>
+                <JobsCreate />
               </RequireAuth>
             }
           />
