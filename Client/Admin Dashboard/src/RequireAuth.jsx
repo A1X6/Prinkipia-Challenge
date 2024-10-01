@@ -6,6 +6,7 @@ const RequireAuth = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [error, setError] = useState(null);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -19,7 +20,7 @@ const RequireAuth = ({ children }) => {
 
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/auth/verify",
+          `${backendUrl}/api/auth/verify`,
           null,
           {
             headers: {

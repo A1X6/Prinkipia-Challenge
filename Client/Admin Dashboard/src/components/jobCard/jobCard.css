@@ -1,8 +1,6 @@
-@import "../../styles/variables.scss";
-
 .job-card {
-  background-color: $dark-bg;
-  border: 1px solid $soft-bg;
+  background-color: var(--dark-bg);
+  border: 1px solid var(--soft-bg);
   border-radius: 8px;
   padding: 16px;
   width: 100%;
@@ -21,10 +19,10 @@
 }
 
 .job-info {
-  color: $soft-color;
+  color: var(--soft-color);
   cursor: pointer;
   padding-bottom: 8px;
-  border-bottom: 1px solid $soft-bg;
+  border-bottom: 1px solid var(--soft-bg);
 }
 
 .job-info h3 {
@@ -65,19 +63,19 @@
 .job-actions button {
   padding: 8px 12px;
   border: none;
-  background-color: $soft-bg;
-  color: $main-color;
+  background-color: var(--soft-bg);
+  color: var(--main-color);
   cursor: pointer;
   border-radius: 5px;
   font-size: 14px;
 }
 
 .job-actions button:hover {
-  background-color: lighten($soft-bg, 10%);
+  background-color: #616161;
 }
 
 .job-actions button:disabled {
-  background-color: $soft-color;
+  background-color: var(--soft-color);
   cursor: not-allowed;
   opacity: 0.6;
 }

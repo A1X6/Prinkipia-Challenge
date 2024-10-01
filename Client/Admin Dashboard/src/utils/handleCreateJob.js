@@ -1,20 +1,22 @@
 import axios from "axios";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-const fetchJobById = async (id) => {
+const handleCreateJob = async (data) => {
   try {
     const token = localStorage.getItem("authToken");
-    const response = await axios.get(
-      `http://localhost:5000/api/admin/jobs/${id}`,
+    const response = await axios.post(
+      `${backendUrl}/api/admin/jobs`,
+      data,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching jobs:", error);
   }
 };
 
-export default fetchJobById;
+export default handleCreateJob;

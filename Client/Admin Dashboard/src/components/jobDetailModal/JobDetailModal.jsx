@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./jobDetailModal.scss";
+import "./jobDetailModal.css";
 import fetchJobById from "../../utils/fetchJobById";
 
 const JobDetailModal = ({ job_, onClose, onRetry, onDelete }) => {

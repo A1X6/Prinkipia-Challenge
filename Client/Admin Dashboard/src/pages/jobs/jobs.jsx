@@ -1,6 +1,6 @@
 import React from "react";
 import JobList from "../../components/jobList/JobList";
-import "./jobs.scss";
+import "./jobs.css";
 
 const Jobs = () => {
   return (

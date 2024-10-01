@@ -1,24 +1,18 @@
-@import "../../styles/variables.scss";
-
-
-
-
-
 .create-job-form-container {
   max-width: 500px;
   margin: 50px auto;
-  background-color: $soft-bg;
+  background-color: var(--soft-bg);
   padding: 30px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  color: $main-color;
+  color: var(--main-color);
 }
 
 h2 {
   margin-bottom: 20px;
   font-size: 24px;
   text-align: center;
-  color: $main-color;
+  color: var(--main-color);
 }
 
 form {
@@ -29,23 +23,23 @@ form {
 label {
   font-size: 16px;
   margin-bottom: 8px;
-  color: $main-color;
+  color: var(--main-color);
 }
 
 input[type="text"] {
   padding: 10px;
   margin-bottom: 15px;
   border-radius: 5px;
-  border: 1px solid $soft-color;
-  background-color: $dark-bg;
-  color: $main-color;
+  border: 1px solid var(--soft-color);
+  background-color: var(--dark-bg);
+  color: var(--main-color);
   width: 100%;
   font-size: 16px;
   transition: all 0.3s ease;
 }
 
 input[type="text"]:focus {
-  border-color: $main-bg;
+  border-color: var(--main-bg);
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
@@ -54,9 +48,9 @@ textarea {
   padding: 10px;
   margin-bottom: 15px;
   border-radius: 5px;
-  border: 1px solid $soft-color;
-  background-color: $dark-bg;
-  color: $main-color;
+  border: 1px solid var(--soft-color);
+  background-color: var(--dark-bg);
+  color: var(--main-color);
   width: 100%;
   font-size: 16px;
   min-height: 120px;
@@ -65,7 +59,7 @@ textarea {
 }
 
 textarea:focus {
-  border-color: $main-bg;
+  border-color: var(--main-bg);
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
@@ -74,15 +68,15 @@ button {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: $main-bg;
-  color: $main-color;
+  background-color: var(--main-bg);
+  color: var(--main-color);
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
-  background-color: lighten($soft-bg, 10%);
+  background-color: #616161;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 

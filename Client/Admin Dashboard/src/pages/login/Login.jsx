@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./login.scss";
+import "./login.css";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -8,12 +8,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${backendUrl}/api/auth/login`,
         {
           email,
           password,

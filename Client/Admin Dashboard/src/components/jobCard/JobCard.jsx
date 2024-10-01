@@ -1,7 +1,6 @@
-import "./jobCard.scss";
+import "./jobCard.css";
 
 const JobCard = ({ job, onJobClick, onRetry, onDelete }) => {
-
   return (
     <div className="job-card">
       <div className="job-info" onClick={() => onJobClick(job)}>

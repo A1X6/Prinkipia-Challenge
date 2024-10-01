@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./alert.scss";
+import "./alert.css";
 
 const Alert = ({ message, status, duration = 3000 }) => {
   const [progress, setProgress] = useState(100);

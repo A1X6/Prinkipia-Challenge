@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./jobsCreate.scss";
+import "./jobsCreate.css";
 import { useNavigate } from "react-router-dom";
 import handleCreateJob from "../../utils/handleCreateJob";
 import Alert from "../../components/alert/Alert";

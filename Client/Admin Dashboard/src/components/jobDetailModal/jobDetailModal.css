@@ -1,12 +1,10 @@
-@import "../../styles/variables.scss";
-
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,17 +12,17 @@
 }
 
 .job-detail-modal-content {
-  background-color: $dark-bg; 
-  border: 1px solid $soft-bg; 
+  background-color: var(--dark-bg);
+  border: 1px solid var(--soft-bg);
   border-radius: 8px;
   padding: 16px;
   width: 100%;
-  max-width: 400px; 
+  max-width: 400px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .job-detail-info {
-  color: $soft-color;
+  color: var(--soft-color);
   margin-bottom: 12px;
 }
 
@@ -45,8 +43,8 @@
 .job-detail-actions button {
   padding: 8px 12px;
   border: none;
-  background-color: $soft-bg;
-  color: $main-color;
+  background-color: var(--soft-bg);
+  color: var(--main-color);
   cursor: pointer;
   border-radius: 5px;
   font-size: 14px;
@@ -54,11 +52,11 @@
 }
 
 .job-detail-actions button:hover {
-  background-color: lighten($soft-bg, 10%);
+  background-color: #616161;
 }
 
 .job-detail-actions button:disabled {
-  background-color: $soft-color;
+  background-color: var(--soft-color);
   cursor: not-allowed;
   opacity: 0.6;
 }

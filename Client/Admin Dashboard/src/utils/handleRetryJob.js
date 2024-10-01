@@ -1,10 +1,11 @@
 import axios from "axios";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const handleRetryJob = async (jobId) => {
   try {
     const token = localStorage.getItem("authToken");
     await axios.post(
-      `http://localhost:5000/api/admin/jobs/${jobId}/retry`,
+      `${backendUrl}/api/admin/jobs/${jobId}/retry`,
       {},
       {
         headers: {

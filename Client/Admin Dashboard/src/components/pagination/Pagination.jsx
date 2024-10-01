@@ -1,4 +1,4 @@
-import "./pagination.scss";
+import "./pagination.css";
 
 const Pagination = ({ currentPage, totalPages, onNextPage, onPrevPage, totalJobs }) => {
   return (

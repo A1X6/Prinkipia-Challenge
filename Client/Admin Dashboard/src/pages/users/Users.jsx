@@ -1,4 +1,4 @@
-import "./users.scss";
+import "./users.css";
 
 const Users = () => {
   return <div></div>;

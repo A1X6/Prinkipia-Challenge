@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import JobDetailModal from "../jobDetailModal/JobDetailModal";
-import "./jobList.scss";
+import "./jobList.css";
 import fetchJobs from "../../utils/fetchJobs";
 import fetchJobById from "../../utils/fetchJobById";
 import handleDeleteJob from "../../utils/handleDeleteJob";
@@ -45,7 +45,7 @@ const JobList = () => {
 
     fetchData();
     fetchJob();
-  }, [currentPage, searchParams]);
+  }, [currentPage]);
 
   const handleCreateJob = () => {
     navigate("/jobs/create");

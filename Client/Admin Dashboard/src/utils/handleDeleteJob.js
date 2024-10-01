@@ -1,9 +1,10 @@
 import axios from "axios";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const handleDeleteJob = async (jobId) => {
   try {
     const token = localStorage.getItem("authToken");
-    await axios.delete(`http://localhost:5000/api/admin/jobs/${jobId}`, {
+    await axios.delete(`${backendUrl}/api/admin/jobs/${jobId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

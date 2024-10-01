@@ -1,4 +1,4 @@
-import "./navbar.scss";
+import "./navbar.css";
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
