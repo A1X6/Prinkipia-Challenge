@@ -10,6 +10,8 @@ import JobCard from "../jobCard/JobCard";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Alert from "../alert/Alert";
+import ConfirmationMenuDelete from "../confirmationMenuDelete/ConfirmationMenuDelete";
+import ConfirmationMenuRetry from "../confirmationMenuRetry/ConfirmationMenuRetry";
 
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
@@ -23,6 +25,8 @@ const JobList = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertStatus, setAlertStatus] = useState("");
+  const [confirmationRetry, setConfirmationRetry] = useState(false);
+  const [confirmationDelete, setConfirmationDelete] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,6 +59,16 @@ const JobList = () => {
     setSelectedJob(job);
     setModalVisible(true);
     setSearchParams({ id: job._id });
+  };
+
+  const handleOnRetryClick = (job) => {
+    setSelectedJob(job);
+    setConfirmationRetry(true);
+  };
+
+  const handleOnDeleteClick = (job) => {
+    setSelectedJob(job);
+    setConfirmationDelete(true);
   };
 
   const closeModal = () => {
@@ -94,8 +108,8 @@ const JobList = () => {
       setAlertStatus("error");
     }
     refreshJobs();
-
     setTimeout(() => setAlertMessage(""), 3000);
+    setConfirmationRetry(false);  
   };
 
   const handleDelete = async (jobId) => {
@@ -112,8 +126,8 @@ const JobList = () => {
       setAlertStatus("error");
     }
     await refreshJobs();
-
     setTimeout(() => setAlertMessage(""), 3000);
+    setConfirmationDelete(false);  
   };
 
   if (loading) {
@@ -135,20 +149,36 @@ const JobList = () => {
             key={job._id}
             job={job}
             onJobClick={handleJobClick}
-            onRetry={() => handleRetry(job._id)}
-            onDelete={() => handleDelete(job._id)}
+            onRetry={() => handleOnRetryClick(job)}
+            onDelete={() => handleOnDeleteClick(job)}
           />
         ))}
       </div>
       <Alert message={alertMessage} status={alertStatus} />
+
       {modalVisible && (
         <JobDetailModal
           job_={selectedJob}
           onClose={closeModal}
-          onDelete={() => handleDelete(selectedJob._id)}
           onRetry={() => handleRetry(selectedJob._id)}
+          onDelete={() => handleDelete(selectedJob._id)}
         />
       )}
+
+      {confirmationRetry && (
+        <ConfirmationMenuRetry
+          onYes={() => handleRetry(selectedJob._id)}
+          onNo={() => setConfirmationRetry(false)}
+        />
+      )}
+
+      {confirmationDelete && (
+        <ConfirmationMenuDelete
+          onYes={() => handleDelete(selectedJob._id)}
+          onNo={() => setConfirmationDelete(false)}
+        />
+      )}
+
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

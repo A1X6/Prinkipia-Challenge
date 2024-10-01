@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./jobDetailModal.css";
 import fetchJobById from "../../utils/fetchJobById";
+import ConfirmationMenuRetry from "../confirmationMenuRetry/ConfirmationMenuRetry";
+import ConfirmationMenuDelete from "../confirmationMenuDelete/ConfirmationMenuDelete";
 
 const JobDetailModal = ({ job_, onClose, onRetry, onDelete }) => {
   const [job, setJob] = useState({
@@ -15,7 +17,9 @@ const JobDetailModal = ({ job_, onClose, onRetry, onDelete }) => {
     updatedAt: "Loading...",
   });
 
-  // Use useEffect to handle setting the job state
+  const [confirmationRetry, setConfirmationRetry] = useState(false);
+  const [confirmationDelete, setConfirmationDelete] = useState(false);
+
   useEffect(() => {
     if (!job_) {
       setJob({
@@ -32,18 +36,31 @@ const JobDetailModal = ({ job_, onClose, onRetry, onDelete }) => {
     } else {
       setJob(job_);
     }
-  }, [job_]); // This will only run when job_ changes
+  }, [job_]);
 
   const isRetryDisabled = job.status !== "FAILED" || job.status === "NOT_FOUND";
   const isDeleteDisabled =
     (job.status !== "FAILED" && job.status !== "QUEUED") ||
     job.status === "NOT_FOUND";
 
+  const handleRetryConfirm = async () => {
+    await onRetry();
+    const updatedJob = await fetchJobById(job._id);
+    setJob(updatedJob);
+    setConfirmationRetry(false); 
+  };
+
+  const handleDeleteConfirm = async () => {
+    await onDelete();
+    onClose(); 
+    setConfirmationDelete(false); 
+  };
+
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay">
       <div
         className="job-detail-modal-content"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()} 
       >
         <h2>Job Details</h2>
         <div className="job-detail-info">
@@ -72,11 +89,11 @@ const JobDetailModal = ({ job_, onClose, onRetry, onDelete }) => {
             <strong>Error Message:</strong> {job.errorMessage || "No errors"}
           </p>
           <p>
-            <strong>Created At:</strong>{" "}
+            <strong>Created At:</strong>
             {new Date(job.createdAt).toLocaleString()}
           </p>
           <p>
-            <strong>Updated At:</strong>{" "}
+            <strong>Updated At:</strong>
             {new Date(job.updatedAt).toLocaleString()}
           </p>
         </div>
@@ -84,26 +101,33 @@ const JobDetailModal = ({ job_, onClose, onRetry, onDelete }) => {
         <div className="job-detail-actions">
           <button onClick={onClose}>Close</button>
           <button
-            onClick={async () => {
-              await onRetry();
-              const updatedJob = await fetchJobById(job._id);
-              setJob(updatedJob);
-            }}
+            onClick={() => setConfirmationRetry(true)} 
             disabled={isRetryDisabled}
           >
             Retry
           </button>
           <button
-            onClick={async () => {
-              await onDelete();
-              onClose();
-            }}
+            onClick={() => setConfirmationDelete(true)} 
             disabled={isDeleteDisabled}
           >
             Delete
           </button>
         </div>
       </div>
+
+      {confirmationRetry && (
+        <ConfirmationMenuRetry
+          onYes={handleRetryConfirm}
+          onNo={() => setConfirmationRetry(false)} 
+        />
+      )}
+
+      {confirmationDelete && (
+        <ConfirmationMenuDelete
+          onYes={handleDeleteConfirm}
+          onNo={() => setConfirmationDelete(false)} 
+        />
+      )}
     </div>
   );
 };

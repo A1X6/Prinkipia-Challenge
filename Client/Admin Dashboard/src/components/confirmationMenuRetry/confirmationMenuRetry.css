@@ -1,0 +1,67 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+  
+  .confirmation-modal-content {
+    background-color: var(--dark-bg);
+    border: 1px solid var(--soft-bg);
+    border-radius: 8px;
+    padding: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+  
+  .confirmation-modal-content h3 {
+    color: var(--main-color);
+    margin-bottom: 12px;
+  }
+  
+  .confirmation-modal-content p {
+    color: var(--soft-color);
+    margin-bottom: 16px;
+  }
+  
+  .confirmation-actions {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .confirmation-actions button {
+    padding: 8px 12px;
+    border: none;
+    background-color: var(--soft-bg);
+    color: var(--main-color);
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  
+  .confirmation-actions button:hover {
+    background-color: #616161;
+  }
+  
+  .confirmation-actions .confirm-btn {
+    background-color: #ff4c4c;
+  }
+  
+  .confirmation-actions .confirm-btn:hover {
+    background-color: #d43f3f;
+  }
+  
+  .confirmation-actions button:disabled {
+    background-color: var(--soft-color);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
