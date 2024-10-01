@@ -1,13 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./jobDetailModal.scss";
 import fetchJobById from "../../utils/fetchJobById";
 
 const JobDetailModal = ({ job_, onClose, onRetry, onDelete }) => {
-  const [job, setJob] = useState(job_);
+  const [job, setJob] = useState({
+    _id: "Loading...",
+    name: "Loading...",
+    status: "Loading...",
+    createdBy: "Loading...",
+    details: "Loading...",
+    retryCount: "Loading...",
+    errorMessage: "Loading...",
+    createdAt: "Loading...",
+    updatedAt: "Loading...",
+  });
 
-  const isRetryDisabled = job.status !== "FAILED";
-  const isDeleteDisabled = job.status !== "FAILED" && job.status !== "QUEUED";
-  if (!job_) return null;
+  // Use useEffect to handle setting the job state
+  useEffect(() => {
+    if (!job_) {
+      setJob({
+        _id: "Job Not Found",
+        name: "Job Not Found",
+        status: "Job Not Found",
+        createdBy: "Job Not Found",
+        details: "Job Not Found.",
+        retryCount: "Job Not Found",
+        errorMessage: "Job Not Found",
+        createdAt: "Job Not Found",
+        updatedAt: "Job Not Found",
+      });
+    } else {
+      setJob(job_);
+    }
+  }, [job_]); // This will only run when job_ changes
+
+  const isRetryDisabled = job.status !== "FAILED" || job.status === "NOT_FOUND";
+  const isDeleteDisabled =
+    (job.status !== "FAILED" && job.status !== "QUEUED") ||
+    job.status === "NOT_FOUND";
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import JobDetailModal from "../jobDetailModal/JobDetailModal";
 import "./jobList.scss";
 import fetchJobs from "../../utils/fetchJobs";
+import fetchJobById from "../../utils/fetchJobById";
 import handleDeleteJob from "../../utils/handleDeleteJob";
 import handleRetryJob from "../../utils/handleRetryJob";
 import Pagination from "../pagination/Pagination";
@@ -33,9 +34,18 @@ const JobList = () => {
       setTotalPages(data.totalPages);
       setLoading(false);
     };
+    const fetchJob = async () => {
+      const id = searchParams.get("id");
+      if (id) {
+        const job = await fetchJobById(id);
+        setSelectedJob(job);
+        setModalVisible(true);
+      }
+    };
 
     fetchData();
-  }, [currentPage]);
+    fetchJob();
+  }, [currentPage, searchParams]);
 
   const handleCreateJob = () => {
     navigate("/jobs/create");

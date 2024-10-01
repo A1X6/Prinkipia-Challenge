@@ -1,48 +1,44 @@
-import "./jobsCreate.scss";
 import React, { useState } from "react";
+import "./jobsCreate.scss";
 import { useNavigate } from "react-router-dom";
+import handleCreateJob from "../../utils/handleCreateJob";
+import Alert from "../../components/alert/Alert";
 
 const JobsCreate = () => {
   const [name, setName] = useState("");
   const [details, setDetails] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertStatus, setAlertStatus] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Replace this URL with your actual API endpoint for creating jobs
-    const apiUrl = "http://localhost:5000/api/admin/jobs";
-
     try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`, // Add your token if needed
-        },
-        body: JSON.stringify({
-          name,
-          details,
-        }),
-      });
-
-      if (!response.ok) {
+      const response = await handleCreateJob({ name, details });
+      if (response.status !== 201) {
         throw new Error("Failed to create job");
       }
-
-      // Navigate back to job list after successful creation
-      navigate("/jobs"); // Adjust this route to your job list path
+      setAlertMessage("Job created successfully.");
+      setAlertStatus("success");
+      setTimeout(() => {
+        setAlertMessage("");
+        navigate("/jobs");
+      }, 3000);
     } catch (error) {
+      setAlertMessage("Failed to created the job.");
+      setAlertStatus("error");
+      setTimeout(() => setAlertMessage(""), 3000);
       console.error("Error:", error);
-      alert("There was an error creating the job. Please try again.");
     }
   };
 
   return (
     <div className="create-job-form-container">
+      <Alert message={alertMessage} status={alertStatus} />
       <h2>Create New Job</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-group">
           <label htmlFor="name">Job Name:</label>
           <input
             type="text"
@@ -52,7 +48,7 @@ const JobsCreate = () => {
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="details">Job Details:</label>
           <textarea
             id="details"

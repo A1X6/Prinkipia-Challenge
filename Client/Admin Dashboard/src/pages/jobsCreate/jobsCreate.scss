@@ -1,0 +1,96 @@
+@import "../../styles/variables.scss";
+
+
+
+
+
+.create-job-form-container {
+  max-width: 500px;
+  margin: 50px auto;
+  background-color: $soft-bg;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: $main-color;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+  color: $main-color;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: $main-color;
+}
+
+input[type="text"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid $soft-color;
+  background-color: $dark-bg;
+  color: $main-color;
+  width: 100%;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: $main-bg;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+textarea {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid $soft-color;
+  background-color: $dark-bg;
+  color: $main-color;
+  width: 100%;
+  font-size: 16px;
+  min-height: 120px;
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+textarea:focus {
+  border-color: $main-bg;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: $main-bg;
+  color: $main-color;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background-color: lighten($soft-bg, 10%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:focus {
+  outline: none;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
