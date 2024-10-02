@@ -134,7 +134,7 @@ The Admin Dashboard project is designed with a modular architecture that separat
 6. **Navigate to the Client Directory**
 
    ```bash
-   cd ../Client/admin
+   cd ../Client/Admin-Dashboard
    ```
 
 7. **Install Client Dependencies**
