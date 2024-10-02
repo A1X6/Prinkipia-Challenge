@@ -143,18 +143,18 @@ The Admin Dashboard project is designed with a modular architecture that separat
    npm install
    ```
 
-8. **Start the Client**
-
-   ```bash
-   npm run dev
-   ```
-
-9. **Set Up Environment Variables**
+8. **Set Up Environment Variables**
 
    - Create a `.env` file in the Admin Dashboard directory with the following variables:
      ```
      VITE_BACKEND_URL=<your-backend-url>
      ```
+
+9. **Start the Client**
+
+   ```bash
+   npm run dev
+   ```
 
 10. **Access the Application**
 
